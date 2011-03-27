@@ -3,7 +3,7 @@
 Plugin Name: Options Framework
 Plugin URI: http://www.wptheming.com
 Description: A framework for building theme options.
-Version: 0.3
+Version: 0.4
 Author: Devin Price
 Author URI: http://www.wptheming.com
 License: GPLv2
@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 /* Basic plugin definitions */
 
-define('OPTIONS_FRAMEWORK_VERSION', '0.3');
+define('OPTIONS_FRAMEWORK_VERSION', '0.4');
 define('OPTIONS_FRAMEWORK_URL', plugin_dir_url( __FILE__ ));
 
 /* Make sure we don't expose any info if called directly */
@@ -173,6 +173,7 @@ function optionsframework_setdefaults() {
 						$optionarray[$key] = wp_filter_post_kses($value);
 					}
 					$values[$option_id] = $optionarray;
+					unset($optionarray);
 				}
 			} else {
 				$value = '';
@@ -376,7 +377,7 @@ function optionsframework_validate($input) {
 					// If it's a multicheck
 					case ($option['type'] == 'multicheck'):
 						$i = 0;
-						foreach ($option['options'] as $key ) {
+						foreach ($option['options'] as $key => $option_name ) {
 							// Make sure the key is lowercase and without spaces
 							$key = ereg_replace("[^A-Za-z0-9]", "", strtolower($key));
 							// Check that the option isn't null
