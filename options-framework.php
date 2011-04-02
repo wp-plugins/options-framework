@@ -3,7 +3,7 @@
 Plugin Name: Options Framework
 Plugin URI: http://www.wptheming.com
 Description: A framework for building theme options.
-Version: 0.4
+Version: 0.5
 Author: Devin Price
 Author URI: http://www.wptheming.com
 License: GPLv2
@@ -161,15 +161,14 @@ function optionsframework_setdefaults() {
 	foreach ($options as $option) {
 	
 		if ( ($option['type'] != 'heading') && ($option['type'] != 'info') ) {
-			$option_id = preg_replace("/\W/", "", strtolower($option['id']) );
+			$option_id = preg_replace('/\W/', '', strtolower($option['id']) );
 			
 			// wp_filter_post_kses for strings
 			if (isset($option['std' ]) ) {
 				if ( !is_array($option['std' ]) ) {
-					$value = wp_filter_post_kses($option['std']);
+					$values[$option_id] = wp_filter_post_kses($option['std']);
 				} else {
 					foreach ($option['std' ] as $key => $value) {
-						$values[$option_id . '_' . $key] = wp_filter_post_kses($value);
 						$optionarray[$key] = wp_filter_post_kses($value);
 					}
 					$values[$option_id] = $optionarray;
@@ -355,6 +354,9 @@ function optionsframework_validate($input) {
 			// Verify that the option has an id
 			if ( isset ($option['id']) ) {
 			
+				// Keep all ids lowercase with no spaces
+				$option['id'] = preg_replace('/\W/', '', strtolower($option['id']) );
+			
 				// Checkbox data isn't sent if it's unchecked, so we'll default it to false
 				if ( ($option['type'] == 'checkbox') && !isset($input[($option['id'])]) ) {
 					$input[($option['id'])] = 'false';
@@ -376,9 +378,10 @@ function optionsframework_validate($input) {
 					
 					// If it's a multicheck
 					case ($option['type'] == 'multicheck'):
+						unset($checkboxarray);
 						foreach ($option['options'] as $key => $option_name ) {
 							// Make sure the key is lowercase and without spaces
-							$key = preg_replace("[^A-Za-z0-9_]", "", strtolower($key));
+							$key = preg_replace('/\W/', '', strtolower($key));
 							// Check that the option isn't null
 							if (!empty($input[($option['id']. '_' . $key)])) {
 								// If it's not null, make sure it's true, add it to an array
@@ -478,4 +481,22 @@ function of_get_option($name, $default = 'false') {
 		return $default;
 	}
 }
+}
+
+/**
+ * Add Theme Options menu item to Admin Bar.
+ */
+ 
+add_action( 'wp_before_admin_bar_render', 'optionsframework_adminbar' );
+
+function optionsframework_adminbar() {
+	
+	global $wp_admin_bar;
+	
+	$wp_admin_bar->add_menu( array(
+		'parent' => 'appearance',
+		'id' => 'of_theme_options',
+		'title' => __( 'Theme Options' ),
+		'href' => admin_url( 'themes.php?page=options-framework' )
+  ));
 }
