@@ -6,7 +6,7 @@
 jQuery(document).ready(function($) {
 	
 	// Fade out the save message
-	$('#message').delay(1000).fadeOut(1000);
+	$('.fade').delay(1000).fadeOut(1000);
 	
 	// Color Picker
 	$('.colorSelector').each(function(){
@@ -71,13 +71,14 @@ jQuery(document).ready(function($) {
 	$('.of-radio-img-label').hide();
 	$('.of-radio-img-img').show();
 	$('.of-radio-img-radio').hide();
+	
 	$('#of-nav li:first').addClass('current');
 	$('#of-nav li a').click(function(evt) {
-	$('#of-nav li').removeClass('current');
-	$(this).parent().addClass('current');
-	var clicked_group = $(this).attr('href');
-	$('.group').hide();
-	$(clicked_group).fadeIn();
-	evt.preventDefault();
+		$('#of-nav li').removeClass('current');
+		$(this).parent().addClass('current');
+		var clicked_group = $(this).attr('href');
+		$('.group').hide();
+		$(clicked_group).fadeIn();
+		evt.preventDefault();
 	}); 	 		
 });	

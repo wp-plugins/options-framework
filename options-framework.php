@@ -3,7 +3,7 @@
 Plugin Name: Options Framework
 Plugin URI: http://www.wptheming.com
 Description: A framework for building theme options.
-Version: 0.5
+Version: 0.6
 Author: Devin Price
 Author URI: http://www.wptheming.com
 License: GPLv2
@@ -27,7 +27,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 /* Basic plugin definitions */
 
-define('OPTIONS_FRAMEWORK_VERSION', '0.4');
+define('OPTIONS_FRAMEWORK_VERSION', '0.6');
 define('OPTIONS_FRAMEWORK_URL', plugin_dir_url( __FILE__ ));
 
 /* Make sure we don't expose any info if called directly */
@@ -90,6 +90,7 @@ function optionsframework_delete_options() {
 function optionsframework_init() {
 
 	// Include the required files
+	require_once dirname( __FILE__ ) . '/options-sanitize.php';
 	require_once dirname( __FILE__ ) . '/options-interface.php';
 	require_once dirname( __FILE__ ) . '/options-medialibrary-uploader.php';
 	
@@ -244,34 +245,12 @@ function optionsframework_page() {
 	$themename = get_theme_data(STYLESHEETPATH . '/style.css');
 	$themename = $themename['Name'];
 	
-	$optionsframework_settings = get_option('optionsframework');
-	
-	// Display message when options are reset/updated
-	$message = '';
-	
-	if ( isset($optionsframework_settings['message']) ) {
-		$message = $optionsframework_settings['message'];
-	}
-	
-	if ( $message == 'reset' ) {
-		$message = __( 'Options reset.' );
-	}
-	if ( $message == 'update' ) {
-		$message = __( 'Options updated.' );
-	}
-	
-	// Sets the option back to null, so the message doesn't display on refresh
-	$optionsframework_settings['message'] = '';
-	update_option('optionsframework',$optionsframework_settings)
+	settings_errors();
 	?>
     
 	<div class="wrap">
     <?php screen_icon( 'themes' ); ?>
-	<h2><?php _e('Theme Options'); ?></h2>
-    
-    <?php if ($message) { ?>
-    	<div id="message" class="updated fade"><p><strong><?php echo $message; ?></strong></p></div>
-    <?php } ?>
+	<h2><?php esc_html_e( 'Theme Options' ); ?></h2>
     
     <div id="of_container">
        <form action="options.php" method="post">
@@ -279,7 +258,7 @@ function optionsframework_page() {
 
         <div id="header">
           <div class="logo">
-            <h2><?php echo $themename; ?></h2>
+            <h2><?php esc_html_e( $themename ); ?></h2>
           </div>
           <div class="clear"></div>
         </div>
@@ -296,12 +275,11 @@ function optionsframework_page() {
           <div class="clear"></div>
         </div>
         <div class="of_admin_bar">
-			<input type="submit" class="button-primary" name="update" value="<?php _e( 'Save Options' ); ?>" />
-            </form>
-            
-            <input type="submit" class="reset-button button-secondary" name="reset" value="<?php _e('Restore Defaults')?>" onclick="return confirm('Click OK to reset. Any theme settings will be lost!');"/>
+			<input type="submit" class="button-primary" name="update" value="<?php esc_attr_e( 'Save Options' ); ?>" />
+            <input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( 'Restore Defaults' ); ?>" onclick="return confirm( '<?php print esc_js( __( 'Click OK to reset. Any theme settings will be lost!' ) ); ?>' );" />
 		</div>
 <div class="clear"></div>
+	</form>
 </div> <!-- / #container -->  
 </div> <!-- / .wrap -->
 
@@ -317,7 +295,6 @@ function optionsframework_page() {
  *
  */
 
-if ( !function_exists( 'optionsframework_validate' ) ) {
 function optionsframework_validate($input) {
 
 	$optionsframework_settings = get_option('optionsframework');
@@ -326,25 +303,20 @@ function optionsframework_validate($input) {
 	$option_name = $optionsframework_settings['id'];
 	
 	// If the reset button was clicked
-	if (!empty($_REQUEST['reset'])) {
-		delete_option($option_name);
-		$optionsframework_settings['message'] = 'reset';
-		update_option('optionsframework', $optionsframework_settings);
-		header('Location: themes.php?page=options-framework');
-		exit;
+	if (!empty($_POST['reset'])) {
+		// If options are deleted sucessfully update the error message
+		if (delete_option($option_name) ) {
+			add_settings_error('options-framework', 'restore_defaults', __('Default options restored.'), 'updated fade');
+		}
 	}
 	
 	else
 	
 	{
 	
-	if (!empty($_REQUEST['update'])) {
+	if (!empty($_POST['update'])) {
 	
 		$clean = array();
-	
-		$optionsframework_settings['message'] = 'update';
-		
-		update_option('optionsframework', $optionsframework_settings);
 
 		// Get the options array we have defined in options.php
 		$options = optionsframework_options();
@@ -355,91 +327,24 @@ function optionsframework_validate($input) {
 			if ( isset ($option['id']) ) {
 			
 				// Keep all ids lowercase with no spaces
-				$option['id'] = preg_replace('/\W/', '', strtolower($option['id']) );
+				$id = preg_replace( '/\W/', '', strtolower( $option['id'] ) );
 			
-				// Checkbox data isn't sent if it's unchecked, so we'll default it to false
-				if ( ($option['type'] == 'checkbox') && !isset($input[($option['id'])]) ) {
-					$input[($option['id'])] = 'false';
+				// Set checkbox to false if it wasn't sent in the $_POST
+				if ( 'checkbox' == $option['type'] && ! isset( $input[$id] ) ) {
+					$input[$id] = "0";
 				}
 				
-				// Verify that there's a value in the $input
-				if (isset ($input[($option['id'])]) ) {
-			
-					switch ( $option['type'] ) {
-					
-					// If it's a checkbox, make sure it's either true or false
-					case ($option['type'] == 'checkbox'):
-						if ( ($input[($option['id'])]) == 'true' )
-							$clean[($option['id'])] = 'true';
-						else {
-							$clean[($option['id'])] = 'false';
-						}
-					break;
-					
-					// If it's a multicheck
-					case ($option['type'] == 'multicheck'):
-						unset($checkboxarray);
-						foreach ($option['options'] as $key => $option_name ) {
-							// Make sure the key is lowercase and without spaces
-							$key = preg_replace('/\W/', '', strtolower($key));
-							// Check that the option isn't null
-							if (!empty($input[($option['id']. '_' . $key)])) {
-								// If it's not null, make sure it's true, add it to an array
-								$checkboxarray[$key] = 'true';
-							}
-							else {
-								$checkboxarray[$key] = 'false';
-							}
-						}
-						// Take all the items that were checked, and set them as the main option
-						if (!empty($checkboxarray)) {
-							$clean[($option['id'])] = $checkboxarray;
-						}
-					break;
-					
-					// If it's a typography option
-					case ($option['type'] == 'typography') :
-						$typography_id = $option['id'];
-						$clean[$typography_id] = array(
-							'size' => $input[$typography_id .'_size'],
-							'face' => $input[$typography_id .'_face'],
-							'style' => $input[$typography_id .'_style'],
-							'color' => $input[$typography_id .'_color']);
-					break;
-					
-					// If it's a background option
-					case ($option['type'] == 'background') :
-						$background_id = $option['id'];
-						if ( empty($input[$background_id .'_color']) ) {
-							$clean[$background_id .'_color'] = '';
-						}
-						if ( empty($input[$background_id .'_image']) ) {
-							$clean[$background_id .'_image'] = '';
-						}
-						$clean[$background_id] = array(
-							'color' => $input[$background_id .'_color'],
-							'image' => $input[$background_id .'_image'],
-							'repeat' => $input[$background_id .'_repeat'],
-							'position' => $input[$background_id .'_position'],
-							'attachment' => $input[$background_id .'_attachment']);
-					break;
-					
-					// If it's a select make sure it's in the array we supplied
-					case ($option['type'] == 'select') :
-						if ( array_key_exists( $input[($option['id'])], $option['options'] ) ) {
-							$clean[($option['id'])] = $input[($option['id'])];
-						}
-					break;
-					
-					// For the remaining options, strip any tags that aren't allowed in posts
-					default:
-						// Cleans html characters
-						$input[($option['id'])] = sanitize_text_field($input[($option['id'])]);
-						// http://codex.wordpress.org/Function_Reference/wp_filter_post_kses
-						$clean[($option['id'])] = wp_filter_post_kses( $input[($option['id'])] );
-					}
-					
-				} // end switch
+				// Set each item in the multicheck to false if it wasn't sent in the $_POST
+				if ( 'multicheck' == $option['type'] && ! isset( $input[$id] ) ) {
+					foreach ( $option['options'] as $key => $value ) {
+						$input[$id][$key] = "0";
+					} 
+				}
+				
+				// For a value to be submitted to database it must pass through a sanitization filter
+				if ( isset ( $input[$id] ) && has_filter('of_sanitize_' . $option['type']) ) {
+					$clean[$id] = apply_filters( 'of_sanitize_' . $option['type'], $input[$id], $option );
+				}
 				
 			} // end isset $input
 			
@@ -448,12 +353,12 @@ function optionsframework_validate($input) {
 	} // end foreach
 	
 	if ( isset($clean) ) {
+		add_settings_error('options-framework', 'save_options', __('Options saved.'), 'updated fade');
 		return $clean; // Return validated input
 	}
 	
-	} // end $_REQUEST['update']
+	} // end $_POST['update']
 	
-}
 }
 
 
@@ -464,7 +369,7 @@ function optionsframework_validate($input) {
  */
 	
 if ( !function_exists( 'of_get_option' ) ) {
-function of_get_option($name, $default = 'false') {
+function of_get_option($name, $default = false) {
 	
 	$optionsframework_settings = get_option('optionsframework');
 	
