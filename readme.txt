@@ -3,8 +3,8 @@ Contributors: Devin Price
 Tags: options, theme options
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X238BDP4QGTV2
 Requires at least: 3.0
-Tested up to: 3.1
-Stable tag: 0.7
+Tested up to: 3.2
+Stable tag: 0.8
 License: GPLv2
 
 == Description ==
@@ -13,7 +13,7 @@ The Options Framework Plugin makes it easy to include an options panel in any Wo
 
 Please visit [http://wptheming.com/options-framework-plugin](http://wptheming.com/options-framework-plugin) for a full description of how to define and use the theme options.
 
-The code is heavily based on the [WooFramework](http://www.woothemes.com/) and their option styles.
+The code was originally based on the [WooFramework](http://www.woothemes.com/) and their option styles.
 
 == Installation ==
 
@@ -50,6 +50,12 @@ You can also watch the video screencast I have at [http://wptheming.com/options-
 1. An example of the "Advanced Options" tag in the "Options Check" theme using this plugin.
 
 == Changelog ==
+
+= 0.8 =
+
+* Saves tab states using local storage
+* Style updates WordPress 3.2 release
+* Added sanitization filter for info (of_sanitize_allowedtags)
 
 = 0.7 =
 
