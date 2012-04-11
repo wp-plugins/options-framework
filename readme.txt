@@ -1,10 +1,10 @@
 === Options Framework ===
 Contributors: Devin Price
 Tags: options, theme options
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X238BDP4QGTV2
-Requires at least: 3.0
+Donate link: http://bit.ly/options-donate
+Requires at least: 3.3
 Tested up to: 3.3
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2
 
 == Description ==
@@ -31,7 +31,7 @@ Please visit [http://wptheming.com/options-framework-plugin](http://wptheming.co
 
 == Installation ==
 
-If your theme already has options enabled, they will show up under the apperance menu.
+If your theme already has options enabled, they will show up under the appearance menu.
 
 If your theme doesn't have options, you can define them to options.php of your theme and they will instantly show up.  For more on how to do this, visit [http://wptheming.com/options-framework-plugin](http://wptheming.com/options-framework-plugin).
 
@@ -64,6 +64,14 @@ You can also watch the video screencast I have at [http://wptheming.com/options-
 1. An example of the "Advanced Options" tag in the "Options Check" theme using this plugin.
 
 == Changelog ==
+
+= 1.1 =
+
+* Added support for wp_editor
+* Updated textarea settings to allow rows parameter
+* Updated cursor:default for h3 metabox, props @yurifedorov
+* Filtering of typography options (@mattwiebe)
+* Updated methods for typography options
 
 = 1.0 =
 

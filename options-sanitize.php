@@ -14,10 +14,6 @@ function of_sanitize_textarea($input) {
 
 add_filter( 'of_sanitize_textarea', 'of_sanitize_textarea' );
 
-/* Info */
-
-
-
 /* Select */
 
 add_filter( 'of_sanitize_select', 'of_sanitize_enum', 10, 2);
@@ -75,6 +71,20 @@ function of_sanitize_upload( $input ) {
 	return $output;
 }
 add_filter( 'of_sanitize_upload', 'of_sanitize_upload' );
+
+/* Editor */
+
+function of_sanitize_editor($input) {
+	if ( current_user_can( 'unfiltered_html' ) ) {
+		$output = $input;
+	}
+	else {
+		global $allowedtags;
+		$output = wpautop(wp_kses( $input, $allowedtags));
+	}
+	return $output;
+}
+add_filter( 'of_sanitize_editor', 'of_sanitize_editor' );
 
 /* Allowed Tags */
 
@@ -156,23 +166,30 @@ add_filter( 'of_background_attachment', 'of_sanitize_background_attachment' );
 
 /* Typography */
 
-function of_sanitize_typography( $input ) {
+function of_sanitize_typography( $input, $option ) {
+	
 	$output = wp_parse_args( $input, array(
 		'size'  => '',
 		'face'  => '',
 		'style' => '',
 		'color' => ''
 	) );
+	
+	if ( isset( $option['options']['faces'] ) && isset( $input['face'] ) ) {
+		if ( !( array_key_exists( $input['face'], $option['options']['faces'] ) ) ) {
+			$output['face'] = '';
+		}
+	}
+	else {
+		$output['face']  = apply_filters( 'of_font_face', $output['face'] );
+	}
 
 	$output['size']  = apply_filters( 'of_font_size', $output['size'] );
-	$output['face']  = apply_filters( 'of_font_face', $output['face'] );
 	$output['style'] = apply_filters( 'of_font_style', $output['style'] );
 	$output['color'] = apply_filters( 'of_color', $output['color'] );
-
 	return $output;
 }
-add_filter( 'of_sanitize_typography', 'of_sanitize_typography' );
-
+add_filter( 'of_sanitize_typography', 'of_sanitize_typography', 10, 2 );
 
 function of_sanitize_font_size( $value ) {
 	$recognized = of_recognized_font_sizes();
@@ -182,7 +199,7 @@ function of_sanitize_font_size( $value ) {
 	}
 	return (int) apply_filters( 'of_default_font_size', $recognized );
 }
-add_filter( 'of_font_face', 'of_sanitize_font_face' );
+add_filter( 'of_font_face', 'of_sanitize_font_size' );
 
 
 function of_sanitize_font_style( $value ) {

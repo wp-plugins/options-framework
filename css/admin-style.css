@@ -12,9 +12,13 @@
 	max-width:780px;
 	background:#fff;
 }
+#optionsframework h3 {
+	cursor: default;
+}
 #optionsframework p {
 	margin-bottom:0;
 	padding-bottom:10px;
+	line-height: 1.4em;
 }
 #optionsframework .section {
 	padding:10px 10px 0;
@@ -62,6 +66,7 @@
 }
 #optionsframework input.checkbox, #optionsframework input.of-radio {
 	width: 30px;
+	margin-top:2px;
 	float:left;
 	clear:both;
 }
@@ -152,6 +157,15 @@
 #optionsframework .mini .explain {
 	max-width:74%;
 }
+
+/* Editor */
+
+#optionsframework .section-editor .explain {
+	max-width: 98%;
+	float:none;
+	margin-bottom:5px;
+}
+
 /* Image Uploader */
 
 #optionsframework .controls input.upload {
@@ -219,4 +233,14 @@
 }
 #optionsframework .button-primary {
 	float:right;
+}
+
+/* Bottom Section */
+
+#optionsframework .section:before, #optionsframework .section:after {
+	content: "";
+	display: table;
+}
+#optionsframework .section:after {
+	clear: both;
 }
