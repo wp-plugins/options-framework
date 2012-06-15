@@ -3,7 +3,7 @@
 Plugin Name: Options Framework
 Plugin URI: http://www.wptheming.com
 Description: A framework for building theme options.
-Version: 1.1
+Version: 1.2
 Author: Devin Price
 Author URI: http://www.wptheming.com
 License: GPLv2
@@ -27,8 +27,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 /* Basic plugin definitions */
 
-define('OPTIONS_FRAMEWORK_VERSION', '1.1');
+define('OPTIONS_FRAMEWORK_VERSION', '1.2');
 define('OPTIONS_FRAMEWORK_URL', plugin_dir_url( __FILE__ ));
+
+load_plugin_textdomain( 'optionsframework', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 
 /* Make sure we don't expose any info if called directly */
 
@@ -66,7 +68,7 @@ function optionsframework_admin_notice() {
 		$user_id = $current_user->ID;
 		if ( ! get_user_meta($user_id, 'optionsframework_ignore_notice') ) {
 			echo '<div class="updated optionsframework_setup_nag"><p>';
-			printf(__('Your current theme does not have support for the Options Framework plugin.  <a href="%1$s" target="_blank">Learn More</a> | <a href="%2$s">Hide Notice</a>'), 'http://wptheming.com/options-framework-plugin', '?optionsframework_nag_ignore=0');
+			printf( __('Your current theme does not have support for the Options Framework plugin.  <a href="%1$s" target="_blank">Learn More</a> | <a href="%2$s">Hide Notice</a>', 'optionsframework'), 'http://wptheming.com/options-framework-plugin', '?optionsframework_nag_ignore=0');
 			echo "</p></div>";
 		}
 	}
@@ -178,8 +180,6 @@ function optionsframework_init() {
 	register_setting( 'optionsframework', $optionsframework_settings['id'], 'optionsframework_validate' );
 	// Change the capability required to save the 'optionsframework' options group.
 	add_filter( 'option_page_capability_optionsframework', 'optionsframework_page_capability' );
-
-
 }
 
 /**
@@ -249,19 +249,19 @@ function optionsframework_setdefaults() {
 if ( !function_exists( 'optionsframework_add_page' ) ) {
 
 	function optionsframework_add_page() {
-		$of_page = add_theme_page('Theme Options', 'Theme Options', 'edit_theme_options', 'options-framework','optionsframework_page');
-		
+		$of_page = add_theme_page(__('Theme Options', 'optionsframework'), __('Theme Options', 'optionsframework'), 'edit_theme_options', 'options-framework','optionsframework_page');
+
 		// Load the required CSS and javscript
 		add_action('admin_enqueue_scripts', 'optionsframework_load_scripts');
 		add_action( 'admin_print_styles-' . $of_page, 'optionsframework_load_styles' );
 	}
-	
+
 }
 
 /* Loads the CSS */
 
 function optionsframework_load_styles() {
-	wp_enqueue_style('admin-style', OPTIONS_FRAMEWORK_URL.'css/admin-style.css');
+	wp_enqueue_style('optionsframework', OPTIONS_FRAMEWORK_URL.'css/optionsframework.css');
 	wp_enqueue_style('color-picker', OPTIONS_FRAMEWORK_URL.'css/colorpicker.css');
 }
 
@@ -271,12 +271,12 @@ function optionsframework_load_scripts($hook) {
 
 	if ( 'appearance_page_options-framework' != $hook )
         return;
-	
+
 	// Enqueued scripts
 	wp_enqueue_script('jquery-ui-core');
 	wp_enqueue_script('color-picker', OPTIONS_FRAMEWORK_URL .'js/colorpicker.js', array('jquery'));
 	wp_enqueue_script('options-custom', OPTIONS_FRAMEWORK_URL .'js/options-custom.js', array('jquery'));
-	
+
 	// Inline scripts from options-interface.php
 	add_action('admin_head', 'of_admin_head');
 }
@@ -318,8 +318,8 @@ if ( !function_exists( 'optionsframework_page' ) ) {
 		<?php optionsframework_fields(); /* Settings */ ?>
 
         <div id="optionsframework-submit">
-			<input type="submit" class="button-primary" name="update" value="<?php esc_attr_e( 'Save Options' ); ?>" />
-            <input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( 'Restore Defaults' ); ?>" onclick="return confirm( '<?php print esc_js( __( 'Click OK to reset. Any theme settings will be lost!' ) ); ?>' );" />
+			<input type="submit" class="button-primary" name="update" value="<?php esc_attr_e( 'Save Options', 'optionsframework' ); ?>" />
+            <input type="submit" class="reset-button button-secondary" name="reset" value="<?php esc_attr_e( 'Restore Defaults', 'optionsframework' ); ?>" onclick="return confirm( '<?php print esc_js( __( 'Click OK to reset. Any theme settings will be lost!', 'optionsframework' ) ); ?>' );" />
             <div class="clear"></div>
 		</div>
 	</form>
@@ -341,8 +341,6 @@ if ( !function_exists( 'optionsframework_page' ) ) {
  * @uses $_POST['update']
  */
 function optionsframework_validate( $input ) {
-
-	//var_dump($input);
 
 	/*
 	 * Restore Defaults.
@@ -451,7 +449,7 @@ function optionsframework_adminbar() {
 	$wp_admin_bar->add_menu( array(
 			'parent' => 'appearance',
 			'id' => 'of_theme_options',
-			'title' => __( 'Theme Options' ),
+			'title' => __( 'Theme Options', 'optionsframework' ),
 			'href' => admin_url( 'themes.php?page=options-framework' )
 		));
 }

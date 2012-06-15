@@ -1,10 +1,11 @@
 === Options Framework ===
+
 Contributors: Devin Price
 Tags: options, theme options
 Donate link: http://bit.ly/options-donate
 Requires at least: 3.3
-Tested up to: 3.3
-Stable tag: 1.1
+Tested up to: 3.4
+Stable tag: 1.2
 License: GPLv2
 
 == Description ==
@@ -24,6 +25,7 @@ The Options Framework Plugin makes it easy to include an options panel in any Wo
 * multicheck
 * color (a jquery color picker)
 * typography (a set of options to define typography)
+* editor
 
 = Learn More =
 
@@ -64,6 +66,15 @@ You can also watch the video screencast I have at [http://wptheming.com/options-
 1. An example of the "Advanced Options" tag in the "Options Check" theme using this plugin.
 
 == Changelog ==
+
+= 1.2 =
+
+* Fix for font_size santization
+* Added internationalization support (@weslly)
+* Portuguese translations (@weslly)
+* Spanish translations (@sksmatt)
+* Make uploader post type non-public (@samargulies)
+* ID can now be passed on info option for styling purposes
 
 = 1.1 =
 
