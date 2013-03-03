@@ -91,8 +91,6 @@ endif;
  
 if ( ! function_exists( 'optionsframework_media_scripts' ) ) :
 
-add_action( 'admin_enqueue_scripts', 'optionsframework_media_scripts' );
-
 function optionsframework_media_scripts() {
 	if ( function_exists( 'wp_enqueue_media' ) )
 		wp_enqueue_media();
@@ -103,5 +101,7 @@ function optionsframework_media_scripts() {
 		'remove' => __( 'Remove', 'optionsframework' )
 	) );
 }
+
+add_action( 'admin_enqueue_scripts', 'optionsframework_media_scripts' );
 
 endif;

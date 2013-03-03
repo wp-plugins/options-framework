@@ -3,9 +3,9 @@
 Contributors: Devin Price
 Tags: options, theme options
 Donate link: http://bit.ly/options-donate-2
-Requires at least: 3.5
+Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 1.5
+Stable tag: 1.5.2
 License: GPLv2
 
 == Description ==
@@ -66,6 +66,14 @@ You can also watch the video screencast I have at [http://wptheming.com/options-
 1. An example of the "Advanced Options" tag in the "Options Check" theme using this plugin.
 
 == Changelog ==
+
+= 1.5.2 =
+
+* Removed update routine to remove "optionsframework" post type
+
+= 1.5.1 =
+
+* Temporarily removed update routine
 
 = 1.5 =
 
