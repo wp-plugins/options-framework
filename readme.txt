@@ -5,7 +5,7 @@ Tags: options, theme options
 Donate link: http://bit.ly/options-donate-2
 Requires at least: 3.6
 Tested up to: 3.7.1
-Stable tag: 1.7.0
+Stable tag: 1.7.1
 License: GPLv2
 
 == Description ==
@@ -66,6 +66,10 @@ You can also watch the video screencast I have at [http://wptheming.com/options-
 1. An example of the "Advanced Options" tab in the "Options Check" theme using this plugin.
 
 == Changelog ==
+
+= 1.7.1 =
+
+* Fix to use option name if set in options.php
 
 = 1.7.0 =
 
