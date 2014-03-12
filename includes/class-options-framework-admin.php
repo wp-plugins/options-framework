@@ -31,7 +31,7 @@ class Options_Framework_Admin {
     	if ( $options ) {
 
 			// Add the options page and menu item.
-			add_action( 'admin_menu', array( $this, 'add_options_page' ) );
+			add_action( 'admin_menu', array( $this, 'add_custom_options_page' ) );
 
 			// Add the required scripts and styles
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
@@ -113,10 +113,21 @@ class Options_Framework_Admin {
 	static function menu_settings() {
 
 		$menu = array(
-			'page_title' => __( 'Theme Options', 'optionsframework'),
+
+			// Modes: submenu, menu
+            'mode' => 'submenu',
+
+            // Submenu default settings
+            'page_title' => __( 'Theme Options', 'optionsframework'),
 			'menu_title' => __('Theme Options', 'optionsframework'),
 			'capability' => 'edit_theme_options',
-			'menu_slug' => 'options-framework'
+			'menu_slug' => 'options-framework',
+            'parent_slug' => 'themes.php',
+
+            // Menu default settings
+            'icon_url' => 'dashicons-admin-generic',
+            'position' => '61'
+
 		);
 
 		return apply_filters( 'optionsframework_menu', $menu );
@@ -127,11 +138,36 @@ class Options_Framework_Admin {
      *
      * @since 1.7.0
      */
-	function add_options_page() {
+	function add_custom_options_page() {
 
 		$menu = $this->menu_settings();
-		$this->options_screen = add_theme_page( $menu['page_title'], $menu['menu_title'], $menu['capability'], $menu['menu_slug'], array( $this, 'options_page' ) );
 
+        switch( $menu['mode'] ) {
+
+            case 'menu':
+            	// http://codex.wordpress.org/Function_Reference/add_menu_page
+                $this->options_screen = add_menu_page(
+                	$menu['page_title'],
+                	$menu['menu_title'],
+                	$menu['capability'],
+                	$menu['menu_slug'],
+                	array( $this, 'options_page' ),
+                	$menu['icon_url'],
+                	$menu['position']
+                );
+                break;
+
+            default:
+            	// http://codex.wordpress.org/Function_Reference/add_submenu_page
+                $this->options_screen = add_submenu_page(
+                	$menu['parent_slug'],
+                	$menu['page_title'],
+                	$menu['menu_title'],
+                	$menu['capability'],
+                	$menu['menu_slug'],
+                	array( $this, 'options_page' ) );
+                break;
+        }
 	}
 
 	/**
@@ -139,7 +175,11 @@ class Options_Framework_Admin {
      *
      * @since 1.7.0
      */
-	function enqueue_admin_styles() {
+	function enqueue_admin_styles( $hook ) {
+
+		if ( $this->options_screen != $hook )
+	        return;
+
 		wp_enqueue_style( 'optionsframework', plugin_dir_url( dirname(__FILE__) ) . 'css/optionsframework.css', array(),  Options_Framework::VERSION );
 		wp_enqueue_style( 'wp-color-picker' );
 	}
@@ -151,9 +191,7 @@ class Options_Framework_Admin {
      */
 	function enqueue_admin_scripts( $hook ) {
 
-		$menu = $this->menu_settings();
-
-		if ( 'appearance_page_' . $menu['menu_slug'] != $hook )
+		if ( $this->options_screen != $hook )
 	        return;
 
 		// Enqueue custom option panel JS

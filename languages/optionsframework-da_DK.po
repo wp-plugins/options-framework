@@ -1,19 +1,17 @@
+# Copyright (C) 2013 
+# This file is distributed under the same license as the  package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Options Framework\n"
+"Project-Id-Version: options-framework\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/options-framework-plugin\n"
 "POT-Creation-Date: 2013-11-26 23:01:08+00:00\n"
-"PO-Revision-Date: 2014-03-05 20:44-0300\n"
-"Last-Translator: Weslly Honorato <weslly.honorato@gmail.com>\n"
-"Language-Team: \n"
-"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;esc_attr_e\n"
-"X-Generator: Poedit 1.6.3\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: .\n"
+"PO-Revision-Date: 2014-03-06 12:26+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: includes/class-options-framework-admin.php:64
 msgid ""
@@ -21,40 +19,38 @@ msgid ""
 "<a href=\"%1$s\" target=\"_blank\">Learn More</a> | <a href=\"%2$s\">Hide "
 "Notice</a>"
 msgstr ""
-"Seu tema atual não suporta o plugin Options Framework. <a href=\"%1$s\" "
-"target=\"_blank\">Saiba Mais</a> | <a href=\"%2$s\">Esconder Alerta</a>"
+"Dit nuværende tema understøtter ikke Options Framework pluginen. <a href="
+"\"%1$s\" target=\"_blank\">Lær mere</a> | <a href=\"%2$s\">Fjern besked</a>"
 
 #: includes/class-options-framework-admin.php:116
 #: includes/class-options-framework-admin.php:117
 #: includes/class-options-framework-admin.php:336
 msgid "Theme Options"
-msgstr "Opções do Tema"
+msgstr "Temaindstillinger"
 
 #: includes/class-options-framework-admin.php:202
 msgid "Save Options"
-msgstr "Salvar Opções"
+msgstr "Gem indstillinger"
 
 #: includes/class-options-framework-admin.php:203
 msgid "Restore Defaults"
-msgstr "Restaurar Padrões"
+msgstr "Nulstil indstillinger"
 
 #: includes/class-options-framework-admin.php:203
 msgid "Click OK to reset. Any theme settings will be lost!"
-msgstr ""
-"Clique em OK para restaurar. As configurações feitas anteriormente serão "
-"perdidas!"
+msgstr "Klik OK for at nulstille. Alle temaindstillinger vil gå tabt!"
 
 #: includes/class-options-framework-admin.php:234
 msgid "Default options restored."
-msgstr "Opções padrão restauradas."
+msgstr "Standardindstillinger nulstillet."
 
 #: includes/class-options-framework-admin.php:288
 msgid "Options saved."
-msgstr "Opções salvas."
+msgstr "Indstillinger gemt."
 
 #: includes/class-options-media-uploader.php:63
 msgid "No file chosen"
-msgstr "Nenhum arquivo escolhido"
+msgstr "Ingen fil valgt"
 
 #: includes/class-options-media-uploader.php:66
 #: includes/class-options-media-uploader.php:119
@@ -64,75 +60,75 @@ msgstr "Upload"
 #: includes/class-options-media-uploader.php:68
 #: includes/class-options-media-uploader.php:120
 msgid "Remove"
-msgstr "Remover"
+msgstr "Fjern"
 
 #: includes/class-options-media-uploader.php:71
 msgid "Upgrade your version of WordPress for full media support."
-msgstr "Atualize sua versão do Wordpress para suporte completo de mídia."
+msgstr "Opgrader din WordPress version for at få fuld medie understøttelse."
 
 #: includes/class-options-media-uploader.php:95
 msgid "View File"
-msgstr "Visualizar Arquivo"
+msgstr "Se fil"
 
 #: includes/class-options-sanitization.php:241
 msgid "No Repeat"
-msgstr "Sem Repetição"
+msgstr "Gentag ikke"
 
 #: includes/class-options-sanitization.php:242
 msgid "Repeat Horizontally"
-msgstr "Repetir Horizontalmente"
+msgstr "Gentag vandred"
 
 #: includes/class-options-sanitization.php:243
 msgid "Repeat Vertically"
-msgstr "Repetir Verticalmente"
+msgstr "Gentag lodret"
 
 #: includes/class-options-sanitization.php:244
 msgid "Repeat All"
-msgstr "Repetir"
+msgstr "Gentag alle"
 
 #: includes/class-options-sanitization.php:257
 msgid "Top Left"
-msgstr "Superior Esquerda"
+msgstr "Top Venstre"
 
 #: includes/class-options-sanitization.php:258
 msgid "Top Center"
-msgstr "Superior Centro"
+msgstr "Top Center"
 
 #: includes/class-options-sanitization.php:259
 msgid "Top Right"
-msgstr "Superior Direita"
+msgstr "Top Højre"
 
 #: includes/class-options-sanitization.php:260
 msgid "Middle Left"
-msgstr "Meio Esquerda"
+msgstr "Midt Venstre"
 
 #: includes/class-options-sanitization.php:261
 msgid "Middle Center"
-msgstr "Meio Centro"
+msgstr "Midt Center"
 
 #: includes/class-options-sanitization.php:262
 msgid "Middle Right"
-msgstr "Meio Direita"
+msgstr "Midt Højre"
 
 #: includes/class-options-sanitization.php:263
 msgid "Bottom Left"
-msgstr "Inferior Esquerda"
+msgstr "Bund Venstre"
 
 #: includes/class-options-sanitization.php:264
 msgid "Bottom Center"
-msgstr "Inferior Centro"
+msgstr "Bund Center"
 
 #: includes/class-options-sanitization.php:265
 msgid "Bottom Right"
-msgstr "Inferior Direita"
+msgstr "Bund Højre"
 
 #: includes/class-options-sanitization.php:278
 msgid "Scroll Normally"
-msgstr "Rolar Normalmente"
+msgstr "Scroll normalt"
 
 #: includes/class-options-sanitization.php:279
 msgid "Fixed in Place"
-msgstr "Fixado no Local"
+msgstr "Fast position"
 
 #: includes/class-options-sanitization.php:353
 msgid "Normal"
@@ -140,47 +136,47 @@ msgstr "Normal"
 
 #: includes/class-options-sanitization.php:354
 msgid "Italic"
-msgstr "Itálico"
+msgstr "Kursiv"
 
 #: includes/class-options-sanitization.php:355
 msgid "Bold"
-msgstr "Negrito"
+msgstr "Fed"
 
 #: includes/class-options-sanitization.php:356
 msgid "Bold Italic"
-msgstr "Negrito e Itálico"
+msgstr "Fed kursiv"
 
 #: options-check/options.php:32
 msgid "One"
-msgstr "Um"
+msgstr "En"
 
 #: options-check/options.php:33
 msgid "Two"
-msgstr "Dois"
+msgstr "To"
 
 #: options-check/options.php:34
 msgid "Three"
-msgstr "Três"
+msgstr "Tre"
 
 #: options-check/options.php:35
 msgid "Four"
-msgstr "Quatro"
+msgstr "Fire"
 
 #: options-check/options.php:36
 msgid "Five"
-msgstr "Cinco"
+msgstr "Fem"
 
 #: options-check/options.php:41
 msgid "French Toast"
-msgstr "Torrada"
+msgstr "Fransk Toast"
 
 #: options-check/options.php:42
 msgid "Pancake"
-msgstr "Panqueca"
+msgstr "Pandekage"
 
 #: options-check/options.php:43
 msgid "Omelette"
-msgstr "Omelete"
+msgstr "Omelet"
 
 #: options-check/options.php:44
 msgid "Crepe"
@@ -188,136 +184,137 @@ msgstr "Crepe"
 
 #: options-check/options.php:45
 msgid "Waffle"
-msgstr "Waffle"
+msgstr "Vaffel"
 
 #: options-check/options.php:105
 msgid "Basic Settings"
-msgstr "Configurações Básicas"
+msgstr "Basisindstillinger"
 
 #: options-check/options.php:109
 msgid "Input Text Mini"
-msgstr "Mini Campo de Texto"
+msgstr "Input Tekst Mini"
 
 #: options-check/options.php:110
 msgid "A mini text input field."
-msgstr "Um mini campo de texto."
+msgstr "Et mini tekstinput felt"
 
 #: options-check/options.php:117
 msgid "Input Text"
-msgstr "Campo de Texto"
+msgstr "Inputtekst"
 
 #: options-check/options.php:118
 msgid "A text input field."
-msgstr "Um campo de texto."
+msgstr "Et tekstinput felt"
 
 #: options-check/options.php:124
 msgid "Textarea"
-msgstr "Área de Texto"
+msgstr "Textarea"
 
 #: options-check/options.php:125
 msgid "Textarea description."
-msgstr "Descrição da área de texto"
+msgstr "Textarea beskrivelse"
 
 #: options-check/options.php:131
 msgid "Input Select Small"
-msgstr "Campo de Seleção Pequeno"
+msgstr "Inout Vælg Lille"
 
 #: options-check/options.php:132
 msgid "Small Select Box."
-msgstr "Caixa de Seleção Pequena"
+msgstr "Lille Select Boks"
 
 #: options-check/options.php:140
 msgid "Input Select Wide"
-msgstr "Campo de Seleção Largo"
+msgstr "Inout Select Bred"
 
 #: options-check/options.php:141
 msgid "A wider select box."
-msgstr "Uma caixa de seleção mais larga"
+msgstr "En bredere select boks."
 
 #: options-check/options.php:148
 msgid "Select a Category"
-msgstr "Selecione a Categoria"
+msgstr "Vælg en kategori"
 
 #: options-check/options.php:149
 msgid "Passed an array of categories with cat_ID and cat_name"
-msgstr "Passa uma array de categorias com cat_ID e cat_name"
+msgstr "Sendte et array med kategorier med cat_ID og cat_name"
 
 #: options-check/options.php:156
 msgid "Select a Tag"
-msgstr "Selecione a Tag"
+msgstr "Vælg et Tag"
 
 #: options-check/options.php:157
 msgid "Passed an array of tags with term_id and term_name"
-msgstr "Passa uma array de tags com term_ID e term_name"
+msgstr "Sendte et array med tags med term_id og term_name"
 
 #: options-check/options.php:164
 msgid "Select a Page"
-msgstr "Selecione a Página"
+msgstr "Vælg en Side"
 
 #: options-check/options.php:165
 msgid "Passed an array of pages with ID and post_title"
-msgstr "Passa uma array de páginas com ID e post_title"
+msgstr "Sendte et array med sider med ID og post_title"
 
 #: options-check/options.php:171
 msgid "Input Radio (one)"
-msgstr "Campo de Radio (um)"
+msgstr "Input Radio (en)"
 
 #: options-check/options.php:172
 msgid "Radio select with default options \"one\"."
-msgstr "Campo de Radio com a opção padrão \"um\"."
+msgstr "Radio select med standard indstillingen \"en\"."
 
 #: options-check/options.php:179
 msgid "Example Info"
-msgstr "Informação de Exemplo"
+msgstr "Eksempel info"
 
 #: options-check/options.php:180
 msgid "This is just some example information you can put in the panel."
-msgstr ""
-"Isto é apenas um exemplo de informação que você pode colocar no painel."
+msgstr "Dette er bare noget eksempelinformation you kan "
 
 #: options-check/options.php:184
 msgid "Input Checkbox"
-msgstr "Campo de Checkbox"
+msgstr "Input Checkbox"
 
 #: options-check/options.php:185
 msgid "Example checkbox, defaults to true."
-msgstr "Exemplo de checkbox, selecionada por padrão."
+msgstr "Eksempel checkbox, standard er true"
 
 #: options-check/options.php:191
 msgid "Advanced Settings"
-msgstr "Configurações Avançadas"
+msgstr "Avancerede indstillinger"
 
 #: options-check/options.php:195
 msgid "Check to Show a Hidden Text Input"
-msgstr "Marque para mostrar um campo de texto oculto"
+msgstr "Klik for at vise et skjult Tekst input"
 
 #: options-check/options.php:196
 msgid "Click here and see what happens."
-msgstr "Clique aqui para saber o que acontece."
+msgstr "klik her og se hvad der sker"
 
 #: options-check/options.php:201
 msgid "Hidden Text Input"
-msgstr "Campo de texto oculto"
+msgstr "Skjult Tekst Input"
 
 #: options-check/options.php:202
 msgid "This option is hidden unless activated by a checkbox click."
-msgstr "Esta opção fica oculta até ser ativada por um clique na checkbox"
+msgstr ""
+"Denne valgmulithed er skjult medmindre den bliver aktiveret med et checkbox "
+"klik"
 
 #: options-check/options.php:209
 msgid "Uploader Test"
-msgstr "Teste de Upload"
+msgstr "Uploader Test"
 
 #: options-check/options.php:210
 msgid "This creates a full size uploader that previews the image."
-msgstr "Isto cria um campo de upload com visualização prévia da imagem."
+msgstr "Dette skaber en fuldstørrelse uploader der forhåndsviser billedet."
 
 #: options-check/options.php:227
 msgid "Example Background"
-msgstr "Exemplo de Fundo"
+msgstr "Eksempel baggrund"
 
 #: options-check/options.php:228
 msgid "Change the background CSS."
-msgstr "Trocar o CSS do fundo."
+msgstr "Rediger baggrundens CSS"
 
 #: options-check/options.php:234
 msgid "Multicheck"
@@ -325,69 +322,60 @@ msgstr "Multicheck"
 
 #: options-check/options.php:235
 msgid "Multicheck description."
-msgstr "Descrição do Multicheck"
+msgstr "Multicheck beskrivelse"
 
 #: options-check/options.php:242
 msgid "Colorpicker"
-msgstr "Escolha de cores"
+msgstr "Farvevælger"
 
 #: options-check/options.php:243
 msgid "No color selected by default."
-msgstr "Nenhuma cor selecionada por padrão."
+msgstr "Ingen farve valgt som standard"
 
 #: options-check/options.php:248
 msgid "Typography"
-msgstr "Tipografia"
+msgstr "Typografi"
 
 #: options-check/options.php:249
 msgid "Example typography."
-msgstr "Exemplo de tipografia."
+msgstr "Eksempel typografi"
 
 #: options-check/options.php:255
 msgid "Custom Typography"
-msgstr "Tipografia personalizada"
+msgstr "Egen typografi"
 
 #: options-check/options.php:256
 msgid "Custom typography options."
-msgstr "Opções de personalização de tipografia."
+msgstr "Egen typografi valgmuligheder"
 
 #: options-check/options.php:263
 msgid "Text Editor"
-msgstr "Editor de Texto"
+msgstr "Tekst Editor"
 
 #: options-check/options.php:281
 msgid "Default Text Editor"
-msgstr "Editor de Texto Padrão"
+msgstr "Standard Tekst Editor"
 
 #: options-check/options.php:282
 msgid ""
 "You can also pass settings to the editor.  Read more about wp_editor in <a "
 "href=\"%1$s\" target=\"_blank\">the WordPress codex</a>"
 msgstr ""
-"Você também pode passar configurações para o editor. Leia mais sobre o "
-"wp_editor no <a href=\"%1$s\" target=\"_blank\">codex do Wordpress</a>"
+"Du kan også sende indstillinger til editoren. Læs mere om wp_editor i <a "
+"href=\"%1$s\" target=\"_blank\">WordPress codexet</a>"
 
 #: options-check/options.php:294
 msgid "Additional Text Editor"
-msgstr "Editor de Texto Adicional"
+msgstr "Ekstra Tekst Editor"
 
 #: options-check/options.php:295
 msgid "This editor includes media button."
-msgstr "Este editor inclui um botão de mídia."
+msgstr "Denne editor inkluderer media knap."
 
 #: options-theme-customizer/options.php:101
 msgid "Basic"
-msgstr "Básico"
+msgstr "Standard"
 
 #: options-theme-customizer/options.php:158
 msgid "Extended"
-msgstr "Extendido"
-
-#~ msgid "Options Framework Internal Container"
-#~ msgstr "Container Interno do Options Framework"
-
-#~ msgid "Gallery"
-#~ msgstr "Galeria"
-
-#~ msgid "Previously Uploaded"
-#~ msgstr "Enviado Anteriormente"
+msgstr "Udvidet"
