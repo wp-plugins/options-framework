@@ -4,7 +4,7 @@ Contributors: downstairsdev
 Tags: options, theme options
 Donate link: http://bit.ly/options-donate-2
 Requires at least: 3.6
-Tested up to: 3.9
+Tested up to: 4.0
 Stable tag: 1.8.2
 License: GPLv2
 
@@ -67,6 +67,10 @@ You can also watch the video screencast I have at [http://wptheming.com/options-
 1. An example of the "Advanced Options" tab in the "Options Check" theme using this plugin.
 
 == Changelog ==
+
+= 1.8.3 =
+
+* Remove sanitization of info option and description field
 
 = 1.8.2 =
 
