@@ -5,7 +5,7 @@ Tags: options, theme options
 Donate link: http://bit.ly/options-donate-2
 Requires at least: 3.6
 Tested up to: 4.1
-Stable tag: 1.8.2
+Stable tag: 1.8.3
 License: GPLv2
 
 == Description ==
